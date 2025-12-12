@@ -137,3 +137,180 @@ class Solution:
             steps = steps+min
         return steps
 
+# 5. Finding Largest element in an Array 
+
+class Solution:
+    def largestel(self, A):
+        large = A[0]
+        N = len(A)
+        for i in range(1,N):
+            large = max(large,A[i])
+        return large
+    
+obj = Solution()
+arr = [4, 15, 2, 99, 43]
+
+print(obj.largestel(arr))
+
+# 6. Finding Second largest element in an Array: 1(Better than Brute force)
+
+class Solution:
+    def seclargestel(self,A):
+        large = A[0]
+        seclarge = float("-inf")
+        N = len(A)
+        for i in range(1,N):
+            large = max(large,A[i])
+        for i in range(0, N):
+            if A[i] > seclarge and A[i] != large:
+                seclarge = A[i]
+        return seclarge
+    
+obj = Solution()
+arr = [4, 15, 2, 99, 43]
+
+print(obj.seclargestel(arr))
+
+# 6. Finding Second largest element in an Array: 2(Optimal)
+
+class Solution:
+    def seclargestel(self,A):
+        large = float("-inf")
+        seclarge = float("-inf")
+        N = len(A)
+        for i in range(0,N):
+            if A[i]>large:
+                seclarge = large
+                large = A[i]
+            elif A[i]>seclarge and A[i]!=large:
+                seclarge = A[i]
+        return seclarge
+    
+obj = Solution()
+arr = [4, 15, 2, 99, 43]
+
+print(obj.seclargestel(arr))
+
+# 7. Check if the array is sorted or not : 1(That is how I solved)
+
+class Solution:
+    def sorted(self,A):
+        Conclusion = True
+        N =len(A)
+        for i in range(1,N-1):
+            if A[i-1]>=A[i]:
+                Conclusion = False
+                break
+        return Conclusion
+            
+obj = Solution()
+arr = [4,15, 2, 99, 43]
+
+print(obj.sorted(arr))
+
+# 7. Check if the array is sorted or not : 2(That is how youtuber solved) 
+
+class Solution:
+    def sorted(self,A):
+        
+        N =len(A)
+        for i in range(1,N-1):
+            if A[i-1]>=A[i]:
+                return False
+        return True
+            
+obj = Solution()
+arr = [4,15, 2, 99, 43]
+
+print(obj.sorted(arr))
+
+# 8. Remove Duplicates from sorted array[in place]: 1(Brute force)
+
+class Solution:
+    def remdup(self, A):
+        
+        N = len(A)
+        freq_map = {}
+        for i in range(0,N):
+                freq_map[A[i]] = 0
+                freq_map.update(freq_map)
+        j = 0
+        for k in freq_map:
+                A[j] = k
+                j += 1
+        return j
+    
+obj = Solution()
+A = [1,1,1,2,3,4,4,7,9,9,9,10]
+print(obj.remdup(A))
+
+# 8. Remove Duplicates from sorted array[in place]: 2(Optimal)
+class Solution:
+    def remdup(self, A):
+        N = len(A)
+        i = 0
+        if N==1:
+            return 1
+        for j in range(1,N):
+            if A[i] != A[j]:
+                i += 1
+                A[i]=A[j]
+        return i+1
+    
+# 9. Right Rotate an array by 1 place: 1 (By the use of slicing)
+
+class Solution:
+    def rot(self, A):
+        N = len(A)
+        A[:] = [A[-1]] + A[0:N-1]
+        return A
+    
+# 9. Right Rotate an array by 1 place: 2
+
+class solution:
+    def rot(self, A):
+        N = len(A)
+        temp = A[-1]
+
+        for i in range(N-2,-1,-1):
+            A[i+1] = A[i]
+        A[0] = temp
+
+        return A
+    
+# 10. Right Rotate an Array by K places: 1 (Slicing)
+
+class solution:
+    def rot(self, A, k):
+        N = len(A)
+        r = k%N
+        A[:] = A[-r:N] + A[0:-r]
+        return A
+    
+# 10. Right Rotate an Array by K places: 2 
+
+class solution:
+    def rot(self, A, k):
+        N = len(A)
+        r = k%N
+        for _ in range(0,r):
+            e = A.pop()
+            A.insert(0,e)
+        return A
+ 
+    
+# 11. Reversing an Array: 1
+
+    def reverse(A, left, right):
+        while left<right:
+            A[left],A[right] = A[right],A[left]
+            left +=1
+            right -=1
+        return A
+    
+# 10. Right Rotate an Array by K places: 3
+
+# revrse last k elements
+# reverse remaining element
+# reverse whole array
+
